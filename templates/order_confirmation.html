@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center">
+    <div class="confirmation-animation">
+        <h1 class="text-success">🎉 Спасибо за заказ!</h1>
+        <p class="lead">Ваш заказ №{{ order.id }} успешно оформлен</p>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Информация о заказе</h5>
+            <p><strong>Имя:</strong> {{ order.customer_name }}</p>
+            <p><strong>Email:</strong> {{ order.customer_email }}</p>
+            <p><strong>Телефон:</strong> {{ order.customer_phone }}</p>
+            <p><strong>Адрес:</strong> {{ order.customer_address }}</p>
+            <p><strong>Сумма заказа:</strong> {{ order.total_amount }} руб.</p>
+            <p><strong>Дата заказа:</strong> {{ order.order_date.strftime('%d.%m.%Y %H:%M') }}</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+            Вернуться к покупкам
+        </a>
+    </div>
+</div>
+{% endblock %}

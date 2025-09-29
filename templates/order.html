@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Оформление заказа</h2>
+
+{% if cart_items %}
+<form action="{{ url_for('process_order') }}" method="POST">
+    <h3>Ваш заказ:</h3>
+    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Сумма</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ "%.2f"|format(item.price) }} руб.</td>
+                <td>
+                    <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}" min="1" style="width: 60px;">
+                </td>
+                <td>{{ "%.2f"|format(item.total) }} руб.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" style="text-align: right;"><strong>Итого:</strong></td>
+                <td><strong>{{ "%.2f"|format(total_price) }} руб.</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h3>Контактные данные:</h3>
+    <div>
+        <label>ФИО:* <input type="text" name="customer_name" required></label><br><br>
+        <label>Email:* <input type="email" name="customer_email" required></label><br><br>
+        <label>Телефон:* <input type="tel" name="customer_phone" required></label><br><br>
+        <label>Адрес доставки:* <textarea name="customer_address" required></textarea></label><br><br>
+    </div>
+
+    <button type="submit">Подтвердить заказ</button>
+</form>
+{% else %}
+<p>Ваша корзина пуста. <a href="{{ url_for('index') }}">Вернуться к покупкам</a>.</p>
+{% endif %}
+{% endblock %}

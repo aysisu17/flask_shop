@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Корзина</h1>
+
+{% if cart_items %}
+<form method="POST" action="{{ url_for('update_cart') }}">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Итого</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr class="cart-item">
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price }} руб.</td>
+                    <td>
+                        <input type="number" 
+                               name="quantity_{{ item.product.id }}" 
+                               value="{{ item.quantity }}" 
+                               min="1" 
+                               class="form-control" 
+                               style="width: 80px;">
+                    </td>
+                    <td>{{ item.total }} руб.</td>
+                    <td>
+                        <a href="{{ url_for('remove_from_cart', product_id=item.product.id) }}" 
+                           class="btn btn-danger btn-sm remove-item"
+                           onclick="return confirm('Удалить товар из корзины?')">
+                            Удалить
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Общая сумма: {{ total }} руб.</h4>
+        </div>
+        <div class="col-md-6 text-end">
+            <button type="submit" class="btn btn-primary">Обновить корзину</button>
+            <a href="{{ url_for('checkout') }}" class="btn btn-success">Оформить заказ</a>
+        </div>
+    </div>
+</form>
+{% else %}
+<div class="alert alert-info">
+    Корзина пуста. <a href="{{ url_for('index') }}">Вернуться к покупкам</a>
+</div>
+{% endif %}
+{% endblock %}
