@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Flask Shop</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Aurea</a>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="{{ url_for('index') }}">Главная</a>
                 <a class="nav-link" href="{{ url_for('cart') }}">
@@ -19,7 +19,7 @@
                         <span class="badge bg-primary">{{ session.cart|length }}</span>
                     {% endif %}
                 </a>
-                <a class="nav-link" href="{{ url_for('admin') }}">Админка</a>
+                <a class="nav-link" href="{{ url_for('admin') }}">Админ</a>
             </div>
         </div>
     </nav>

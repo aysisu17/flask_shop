@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Административная панель</h1>
+<h1>Админ панель</h1>
 
 <div class="card mb-4">
     <div class="card-body">
@@ -42,8 +42,20 @@
                 <td>{{ order.customer_name }}</td>
                 <td>{{ order.customer_email }}</td>
                 <td>{{ order.customer_phone }}</td>
-                <td>{{ order.total_amount }} руб.</td>
-                <td>{{ order.order_date.strftime('%d.%m.%Y %H:%M') }}</td>
+                <td>{{ "%.2f"|format(order.total_amount) }} руб.</td>
+                <td>
+                    {% if order.order_date %}
+                        {% if order.order_date is string %}
+                            {# Если order_date это строка, форматируем её #}
+                            {{ order.order_date[:16].replace('T', ' ') }}
+                        {% else %}
+                            {# Если это datetime объект, используем strftime #}
+                            {{ order.order_date.strftime('%d.%m.%Y %H:%M') }}
+                        {% endif %}
+                    {% else %}
+                        Не указана
+                    {% endif %}
+                </td>
                 <td>
                     <a href="#" class="btn btn-sm btn-info">Подробнее</a>
                 </td>
