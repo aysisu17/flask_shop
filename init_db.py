@@ -128,7 +128,7 @@ def init_products():
             ('Боди кружевное', 3999.99, 'Элегантное кружевное боди', 'lace_bodysuit.jpg'),
             ('Пижама хлопковая', 3499.99, 'Удобная хлопковая пижама', 'cotton_pajamas.jpg'),
             ('Халат банный', 4999.99, 'Мягкий банный халат', 'bathrobe.jpg'),
-            ('Носки хлопковые', 499.99, 'Комфортные хлопковые носки (пара)', 'cotton_socks.jpg')
+            ('Носки хлопковые', 499.99, 'Комфортные хлопковые носки', 'cotton_socks.jpg')
         ]
         
         for product in products:
@@ -137,11 +137,11 @@ def init_products():
                 product
             )
         
-        print(f"✅ Добавлено {len(products)} товаров одежды в базу данных")
+        print(f" Добавлено {len(products)} товаров одежды в базу данных")
     else:
         cursor.execute('SELECT COUNT(*) as count FROM product')
         count = cursor.fetchone()[0]
-        print(f"ℹ️ В базе данных уже есть {count} товаров")
+        print(f"В базе данных уже есть {count} товаров")
     
     conn.commit()
     conn.close()

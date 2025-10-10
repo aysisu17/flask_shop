@@ -188,8 +188,8 @@ if __name__ == '__main__':
         #проверяем, есть ли товары
         products = Product.query.all()
         if not products:
-            print("⚠️ Товары не найдены. Запустите: python init_db.py")
+            print("Товары не найдены. Запустите: python init_db.py")
         else:
-            print(f"✅ Загружено {len(products)} товаров")
+            print(f"Загружено {len(products)} товаров")
     
     app.run(debug=True)
